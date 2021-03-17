@@ -2,11 +2,14 @@ document.addEventListener('DOMContentLoaded' , ()=> {
   const bird = document.querySelector('.bird')
   const gameDisplay = document.querySelector('.game-container')
   const ground = document.querySelector('.ground')
-
+  const time = document.querySelector('.time')
+  
+  var sec = [0,0,0,0]
   let birdLeft = 220
   let birdBottom = 100
   let gravity = 2
   let isGameOver = false
+  let gap = 500
 
   function startGame(){
     birdBottom -= gravity
@@ -17,13 +20,15 @@ document.addEventListener('DOMContentLoaded' , ()=> {
 
   function control(e){
     if(e.keyCode === 32){
-      jump()
+      for(let i=0; i<10; i++){
+        setInterval(jump(),100)
+      }
     }
   }
 
 
   function jump(){
-    if(birdBottom < 500)birdBottom += 50
+    if(birdBottom < 500)birdBottom += 5
     bird.style.bottom = birdBottom
   }
 
@@ -31,7 +36,7 @@ document.addEventListener('DOMContentLoaded' , ()=> {
 
   function generateObstable(){
     let obstacleLeft = 500
-    let randomHeight = Math.random() * 60
+    let randomHeight = Math.random() * 80
     let obstacleBotton = randomHeight
     const obstacle = document.createElement('div')
     const topObstacle = document.createElement('div')
@@ -40,22 +45,26 @@ document.addEventListener('DOMContentLoaded' , ()=> {
       topObstacle.classList.add('topObstacle')
     }
     gameDisplay.appendChild(obstacle)
+    gameDisplay.appendChild(topObstacle)
     obstacle.style.left = obstacleLeft + 'px'
+    topObstacle.style.left = obstacleLeft + 'px'
     obstacle.style.bottom = obstacleBotton + 'px'
+    topObstacle.style.bottom = obstacleBotton + gap + 'px'
     
     function moveObstacle(){
       obstacleLeft -= 2
       obstacle.style.left = obstacleLeft + 'px'
+      topObstacle.style.left = obstacleLeft + 'px'
 
-      if (obstacleLeft === -60){
+      if (obstacleLeft === 10){
         clearInterval(timerId)
         gameDisplay.removeChild(obstacle)
+        gameDisplay.removeChild(topObstacle)
       }
       
       //bird dead
       if(
-          ((birdLeft+60>=obstacleLeft && birdLeft<obstacleLeft+60) && birdBottom <= 360 - (150 - obstacleBotton)) || //柱長-(地板高-離地)
-           
+          ((birdLeft+60>=obstacleLeft && birdLeft<obstacleLeft+60) && ( birdBottom+45 >= obstacleBotton+gap-158 || birdBottom <= 360 - (150 - obstacleBotton))) || //撞到下面 柱長-(地板高-離地)
            birdBottom === 0
           ){
         gameOver()
@@ -73,7 +82,27 @@ document.addEventListener('DOMContentLoaded' , ()=> {
     document.removeEventListener('keyup', control)
     document.querySelector('.sky').style.backgroundColor = 'black'
   }
+
+  function counting(){
+    sec[3]+=1
+    if(sec[3]>9){
+      sec[2] += 1
+      sec[3] = 0
+    }
+    if(sec[2]>5){
+      sec[1] += 1
+      sec[2] = 0
+    }
+
+    }
+  }
+  if(!isGameOver){
+    setInterval(counting, 17)
+  } 
+
+
+
+
 })
 
-  
   
