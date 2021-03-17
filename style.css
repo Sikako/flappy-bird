@@ -27,8 +27,16 @@
 }
 
 .obstacle {
- background-color: green;
+ background-image: url('flappybird-pipe.png');
  width: 60px;
  height: 360px;
  position:absolute; 
 }
+
+.topObstacle {
+  background-image: url('flappybird-pipe.png');
+  transform: rotate(180);
+  width: 60px;
+  height: 360px;
+  position:absolute; 
+ }

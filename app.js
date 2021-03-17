@@ -34,7 +34,11 @@ document.addEventListener('DOMContentLoaded' , ()=> {
     let randomHeight = Math.random() * 60
     let obstacleBotton = randomHeight
     const obstacle = document.createElement('div')
-    obstacle.classList.add('obstacle')
+    const topObstacle = document.createElement('div')
+    if(!isGameOver) {
+      obstacle.classList.add('obstacle')
+      topObstacle.classList.add('topObstacle')
+    }
     gameDisplay.appendChild(obstacle)
     obstacle.style.left = obstacleLeft + 'px'
     obstacle.style.bottom = obstacleBotton + 'px'
@@ -55,10 +59,11 @@ document.addEventListener('DOMContentLoaded' , ()=> {
            birdBottom === 0
           ){
         gameOver()
+        clearInterval(timerId)
       }
     }
     const timerId = setInterval(moveObstacle, 20)
-    setTimeout(generateObstable, 3000)
+    if(!isGameOver) setTimeout(generateObstable, 3000)
   }
   generateObstable()
 
@@ -66,7 +71,9 @@ document.addEventListener('DOMContentLoaded' , ()=> {
     clearInterval(gameTimerId)
     isGameOver = true
     document.removeEventListener('keyup', control)
-
+    document.querySelector('.sky').style.backgroundColor = 'black'
   }
-
 })
+
+  
+  
