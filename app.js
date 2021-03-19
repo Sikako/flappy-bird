@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded' , ()=> {
   let birdBottom = 100
   let gravity = 2
   let isGameOver = false
-  let gap = 500
+  let gap = 150
   
   function startGame(){
     birdBottom -= gravity
@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded' , ()=> {
     let obstacleBotton = randomHeight
     const obstacle = document.createElement('div')
     const topObstacle = document.createElement('div')
+
     if(!isGameOver) {
       obstacle.classList.add('obstacle')
       topObstacle.classList.add('topObstacle')
@@ -54,8 +55,10 @@ document.addEventListener('DOMContentLoaded' , ()=> {
     obstacle.style.left = obstacleLeft + 'px'
     topObstacle.style.left = obstacleLeft + 'px'
     obstacle.style.bottom = obstacleBotton + 'px'
-    topObstacle.style.bottom = obstacleBotton + gap + 'px'
+    topObstacle.style.bottom = 360 + obstacleBotton + gap + 'px'
     
+    console.log("bird top: "+ (birdBottom+45+150).toString())
+    console.log("topobstacle: " + topObstacle.style.bottom)
     function moveObstacle(){
       obstacleLeft -= 2
       obstacle.style.left = obstacleLeft + 'px'
@@ -69,7 +72,7 @@ document.addEventListener('DOMContentLoaded' , ()=> {
       
       //bird dead
       if(
-        ((birdLeft+60>=obstacleLeft && birdLeft<obstacleLeft+60) && ( birdBottom+45 >= obstacleBotton+gap-158 || birdBottom <= 360 - (150 - obstacleBotton))) || //撞到下面 柱長-(地板高-離地)
+        ((birdLeft+60>=obstacleLeft && birdLeft<obstacleLeft+60) && ( birdBottom+45+150 >= parseInt(topObstacle.style.bottom)  || birdBottom <= 360 - (150 - obstacleBotton))) || //撞到下面 柱長-(地板高-離地)
         birdBottom === 0
         ){
           gameOver()

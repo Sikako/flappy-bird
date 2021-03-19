@@ -54,6 +54,8 @@
  width: 60px;
  height: 360px;
  position:absolute; 
+ border: 1px solid red;
+ border-top: 2px solid yellow;
 }
 
 .topObstacle {
@@ -62,6 +64,8 @@
   width: 60px;
   height: 360px;
   position:absolute; 
+  border: 1px solid red;
+  border-top: 2px solid yellow;
  }
 
  .time {
