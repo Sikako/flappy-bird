@@ -25,7 +25,7 @@
 }
 
 .border-right {
-  width: 70px;
+  width: 300px;
   height: 760px;
   background-color: white;
   z-index: +2;
@@ -47,6 +47,7 @@
   position: absolute;
   height: 45px;
   width: 60px;
+  z-index: +2;
 }
 
 .obstacle {
@@ -66,6 +67,7 @@
   position:absolute; 
   border: 1px solid red;
   border-top: 2px solid yellow;
+  z-index: +1;
  }
 
  .time {
@@ -73,6 +75,16 @@
    font-size: 1cm;
    left: 40%;
    top: 100px;
-   color: white;
+   color: brown;
    z-index:+3;
+ }
+
+
+ .cloud {
+   background-image: url('cloud.png');
+   width: 70px;
+   height: 30px;
+   position: absolute;
+   background-size: contain;
+   background-repeat: no-repeat;
  }

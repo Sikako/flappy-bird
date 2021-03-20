@@ -8,9 +8,10 @@ document.addEventListener('DOMContentLoaded' , ()=> {
   const gameDisplay = document.querySelector('.game-container')
   const ground = document.querySelector('.ground')
   const time = document.querySelector('.time')
-  
-  var sec = [0,0,0,0]
+
+
   let birdLeft = 220
+  let birdRight = birdLeft+60
   let birdBottom = 100
   let gravity = 2
   let isGameOver = false
@@ -37,62 +38,94 @@ document.addEventListener('DOMContentLoaded' , ()=> {
     bird.style.bottom = birdBottom
   }
   
+  function randomValue(v){
+    return Math.floor((Math.random() * v) + 1)
+  }
+
   document.addEventListener('keyup', control)
   
   function generateObstable(){
     let obstacleLeft = 500
-    let randomHeight = Math.random() * 80
+    let cloudLeft = 600
+    let cloudTop = 100 + randomValue(100)
+    
+    let randomHeight = randomValue(80)
     let obstacleBotton = randomHeight
     const obstacle = document.createElement('div')
     const topObstacle = document.createElement('div')
+    const cloud = document.createElement('div')
 
     if(!isGameOver) {
       obstacle.classList.add('obstacle')
       topObstacle.classList.add('topObstacle')
+      cloud.classList.add('cloud')
     }
+    gameDisplay.appendChild(cloud)
     gameDisplay.appendChild(obstacle)
     gameDisplay.appendChild(topObstacle)
+
     obstacle.style.left = obstacleLeft + 'px'
     topObstacle.style.left = obstacleLeft + 'px'
     obstacle.style.bottom = obstacleBotton + 'px'
-    topObstacle.style.bottom = 360 + obstacleBotton + gap + 'px'
+    topObstacle.style.bottom = 360 + obstacleBotton + gap + randomValue(60) + 'px'
+    cloud.style.top = cloudTop + 'px'
+    cloud.style.left = cloudLeft + 'px'
     
     console.log("bird top: "+ (birdBottom+45+150).toString())
     console.log("topobstacle: " + topObstacle.style.bottom)
+    console.log("opstacleLeft: " + obstacleLeft)
+    console.log("birdLeft: " + birdLeft)
+    console.log("random: " + randomValue(10))
+
+    function moveCloud(){
+      cloudLeft -= 1
+      cloud.style.left = cloudLeft + 'px'
+
+      if (cloudLeft === 0){
+        gameDisplay.removeChild(cloud)
+      }
+    }
+
     function moveObstacle(){
       obstacleLeft -= 2
+
       obstacle.style.left = obstacleLeft + 'px'
       topObstacle.style.left = obstacleLeft + 'px'
-      
-      if (obstacleLeft === 10){
-        clearInterval(timerId)
-        gameDisplay.removeChild(obstacle)
+
+      if (obstacleLeft === 0){
         gameDisplay.removeChild(topObstacle)
+        gameDisplay.removeChild(obstacle)
+        
       }
       
+
       //bird dead
       if(
-        ((birdLeft+60>=obstacleLeft && birdLeft<obstacleLeft+60) && ( birdBottom+45+150 >= parseInt(topObstacle.style.bottom)  || birdBottom <= 360 - (150 - obstacleBotton))) || //撞到下面 柱長-(地板高-離地)
+        ((birdRight >= obstacleLeft && birdLeft < obstacleLeft+60) && ( birdBottom+45+150 >= parseInt(topObstacle.style.bottom)  || birdBottom <= 360 - (150 - obstacleBotton))) || //撞到下面 柱長-(地板高-離地)
         birdBottom === 0
         ){
           gameOver()
-          clearInterval(timerId)
+          clearInterval(timerObstacle)
+          clearInterval(timerCloud)
         }
-      }
-      const timerId = setInterval(moveObstacle, 20)
-      if(!isGameOver) setTimeout(generateObstable, 3000)
     }
-    generateObstable()
+    const timerObstacle = setInterval(moveObstacle, 20- (second/10)*0.3 - minute*1.8)
+    const timerCloud = setInterval(moveCloud, 30 - randomValue(20))
+    if(!isGameOver){
+      setTimeout(generateObstable, 3000)
+    } 
+  }
+  generateObstable()
     
-    function gameOver(){
+  function gameOver(){
       clearInterval(gameTimerId)
       clearInterval(int)
       isGameOver = true
       document.removeEventListener('keyup', control)
       document.querySelector('.sky').style.backgroundColor = 'black'
-    }
+  }
     
-    function timer() { 
+  function timer() { 
       millisecond=millisecond+50;
       if(millisecond>=1000) { 
         millisecond=0; 
@@ -104,8 +137,8 @@ document.addEventListener('DOMContentLoaded' , ()=> {
         minute=0;
       }
       time.innerHTML = minute+':'+second+':'+millisecond;
-    } //暫停函式 function stop() { window.clearInterval(int); }
-    var int =setInterval(timer,50);//每隔50毫秒執行一次timer函式 
+  } //暫停函式 function stop() { window.clearInterval(int); }
+  var int =setInterval(timer,50);//每隔50毫秒執行一次timer函式 
     
     
     
