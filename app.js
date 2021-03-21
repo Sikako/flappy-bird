@@ -1,3 +1,5 @@
+// var nickname = prompt("name") 
+
 document.addEventListener('DOMContentLoaded' , ()=> {
   
   //初始化變數 
@@ -101,7 +103,7 @@ document.addEventListener('DOMContentLoaded' , ()=> {
 
       //bird dead
       if(
-        ((birdRight >= obstacleLeft && birdLeft < obstacleLeft+60) && ( birdBottom+45+150 >= parseInt(topObstacle.style.bottom)  || birdBottom <= 360 - (150 - obstacleBotton))) || //撞到下面 柱長-(地板高-離地)
+        ((birdRight+15 >= obstacleLeft && birdLeft+10 < obstacleLeft+60) && ( birdBottom+45+150+17 >= parseInt(topObstacle.style.bottom)  || birdBottom +20 <= 360 - (150 - obstacleBotton))) || //撞到下面 柱長-(地板高-離地)
         birdBottom === 0
         ){
           gameOver()
@@ -109,7 +111,8 @@ document.addEventListener('DOMContentLoaded' , ()=> {
           clearInterval(timerCloud)
         }
     }
-    const timerObstacle = setInterval(moveObstacle, 20- (second/10)*0.3 - minute*1.8)
+    // 遊戲速度
+    const timerObstacle = setInterval(moveObstacle, 20- (second/10)*0.5 - minute*2.9)
     const timerCloud = setInterval(moveCloud, 30 - randomValue(20))
     if(!isGameOver){
       setTimeout(generateObstable, 3000)

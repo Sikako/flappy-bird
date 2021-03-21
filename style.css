@@ -33,6 +33,15 @@
   left: 555px;
 }
 
+.border-top {
+  width: 700px;
+  position: absolute;
+  height: 10px;
+  top: 0px;
+  background-color: white;
+  z-index: +2;
+}
+
 .ground {
   background-color: brown;
   width: 500px;  
@@ -43,11 +52,14 @@
 }
 
 .bird {
-  background-color: yellow;
+  background-image: url('sikako.png');
+  background-size:110%;
+  background-repeat: no-repeat;
   position: absolute;
-  height: 45px;
-  width: 60px;
+  height: 90px;
+  width: 90px;
   z-index: +2;
+  border-bottom: -4;
 }
 
 .obstacle {
@@ -79,12 +91,16 @@
    z-index:+3;
  }
 
-
+ 
  .cloud {
-   background-image: url('cloud.png');
-   width: 70px;
-   height: 30px;
-   position: absolute;
-   background-size: contain;
-   background-repeat: no-repeat;
- }
+  background-image: url('cloud.png');
+  width: 70px;
+  height: 30px;
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#start {
+  z-index:+4;
+}
