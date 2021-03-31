@@ -1,4 +1,3 @@
-// var nickname = prompt("name") 
 
 document.addEventListener('DOMContentLoaded' , ()=> {
   
@@ -10,6 +9,8 @@ document.addEventListener('DOMContentLoaded' , ()=> {
   const gameDisplay = document.querySelector('.game-container')
   const ground = document.querySelector('.ground')
   const time = document.querySelector('.time')
+  const audio = document.getElementById("audio");
+  const Daudio = document.getElementById("Daudio");
 
 
   let birdLeft = 220
@@ -126,6 +127,9 @@ document.addEventListener('DOMContentLoaded' , ()=> {
       isGameOver = true
       document.removeEventListener('keyup', control)
       document.querySelector('.sky').style.backgroundColor = 'black'
+      audio.pause()
+      Daudio.play();
+      setTimeout(() => { Daudio.pause()}, 5000);
   }
     
   function timer() { 
@@ -149,4 +153,13 @@ document.addEventListener('DOMContentLoaded' , ()=> {
     
 })
 
+var isStart = false;
+document.addEventListener('keypress', ()=>{
+  const audio = document.getElementById("audio");
+  if(!isStart){
+    audio.currentTime = 0;
+    audio.play();
+    isStart = true;
+  }
+})
   
