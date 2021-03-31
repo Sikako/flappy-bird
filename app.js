@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded' , ()=> {
       //bird dead
       if(
         ((birdRight+15 >= obstacleLeft && birdLeft+10 < obstacleLeft+60) && ( birdBottom+45+150+17 >= parseInt(topObstacle.style.bottom)  || birdBottom +20 <= 360 - (150 - obstacleBotton))) || //撞到下面 柱長-(地板高-離地)
-        birdBottom === 0
+        birdBottom+20 === 0
         ){
           gameOver()
           clearInterval(timerObstacle)
@@ -157,7 +157,7 @@ var isStart = false;
 document.addEventListener('keypress', ()=>{
   const audio = document.getElementById("audio");
   if(!isStart){
-    audio.currentTime = 0;
+    audio.currentTime = 30;
     audio.play();
     isStart = true;
   }

@@ -60,6 +60,7 @@
   width: 90px;
   z-index: +2;
   border-bottom: -4;
+  /* border: solid 1px red; */
 }
 
 .obstacle {
