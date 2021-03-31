@@ -126,29 +126,36 @@ document.addEventListener('DOMContentLoaded' , ()=> {
       clearInterval(int)
       isGameOver = true
       document.removeEventListener('keyup', control)
-      document.querySelector('.sky').style.backgroundColor = 'black'
+      let ch = setInterval(changeSky, 50); 
+      // document.querySelector('.sky').style.backgroundColor = 'black'
       audio.pause()
       Daudio.play();
-      setTimeout(() => { Daudio.pause()}, 5000);
+      setTimeout(() => { Daudio.pause(); clearInterval(ch);}, 5000);
   }
-    
+  
   function timer() { 
-      millisecond=millisecond+50;
-      if(millisecond>=1000) { 
-        millisecond=0; 
-        second=second+1; 
-      }if(second>=60) { 
-        second=0; 
-        minute=minute+1; 
-      }if(minute>=60) { 
-        minute=0;
-      }
-      time.innerHTML = minute+':'+second+':'+millisecond;
+    millisecond=millisecond+50;
+    if(millisecond>=1000) { 
+      millisecond=0; 
+      second=second+1; 
+    }if(second>=60) { 
+      second=0; 
+      minute=minute+1; 
+    }if(minute>=60) { 
+      minute=0;
+    }
+    time.innerHTML = minute+':'+second+':'+millisecond;
   } //暫停函式 function stop() { window.clearInterval(int); }
   var int =setInterval(timer,50);//每隔50毫秒執行一次timer函式 
-    
-    
-    
+  
+  
+  
+  function changeSky(){
+    const sky = document.querySelector('.sky');
+    var color = 'rgb('+randomValue(255).toString()+','+randomValue(255).toString()+','+randomValue(255).toString()+')';
+    sky.style.backgroundColor = color;//ffffff
+    console.log(color)
+  }
     
     
 })
