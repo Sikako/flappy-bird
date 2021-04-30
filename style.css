@@ -1,12 +1,12 @@
-.body {
+/* .body {
   display: flex;
-}
+} */
 
 .game-container {
   width: 500px;
   height: 730px;
   position: absolute;
-  left: 55px;
+  left: 55px;                       /* 左邊偏移 */
 }
 
 .sky {
@@ -20,7 +20,7 @@
   width: 70px;
   height: 760px;
   background-color: white;
-  z-index: +2;
+  z-index: +2;                     /* z軸的高度 */
   position: absolute;
 }
 
@@ -52,14 +52,15 @@
 }
 
 .bird {
-  background-image: url('sikako.png');
+  background-image: url('sikako.png');/* 主角圖片 */
   background-size:110%;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat;       /* 不重複 */
   position: absolute;
   height: 90px;
   width: 90px;
   z-index: +2;
-  border-bottom: -4;
+  /* border-bottom: -4; */
+
   /* border: solid 1px red; */
 }
 
@@ -77,12 +78,12 @@
 
 .topObstacle {
   background-image: url('flappybird-pipe.png');
-  transform: rotate(180deg);
+  transform: rotate(180deg);                      /* 旋轉180度 */
   width: 60px;
   height: 360px;
   position:absolute; 
   border: 1px solid red;
-  border-top: 2px solid yellow;
+  border-top: 2px solid yellow;               /* 邊緣警示線 */
   z-index: +1;
  }
 

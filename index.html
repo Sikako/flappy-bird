@@ -3,30 +3,21 @@
   <head>
     
     <title>Flappy Bird</title>
-    <icon ></icon>
-    <link rel="stylesheet" href="style.css">
-    <script src="app.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="style.css">          <!-- 引用外部css -->
+    <script src="app.js" charset="utf-8"></script>    <!-- 引用外部js -->
   </head>
 
   <body>
-    <!-- <div class="preStart">
-      <input type="text">
-      <button class="start">start</button>
-
-    </div> -->
-
-
-    <div class="border-left"></div>
-    <div class="border-top"></div>
-    <div class="game-container">
-      <div class="time">00:00</div>
-      <div class="sky">
-        <div class="bird"></div>
+    <div class="border-left"></div>                   <!-- 雲跟水管出屏幕蓋住 -->
+    <div class="border-top"></div>                    <!-- 雲跟水管出屏幕蓋住 -->
+    <div class="game-container">                      <!-- 遊戲畫面 -->
+      <div class="time">00:00</div>                   <!-- 遊戲時間 -->
+      <div class="sky">                               <!-- 天空 -->
+        <div class="bird"></div>                      <!-- 主角 -->
       </div>
-      <div class="ground"></div>
+      <div class="ground"></div>                      <!-- 地板 -->
     </div>
-    <div class="border-right"></div>
-    <audio src="start.mp3" id="audio"></audio>
-    <audio src="death.mp3" id="Daudio"></audio>
-
+    <div class="border-right"></div>                  <!-- 雲跟水管出屏幕蓋住 -->
+    <audio src="start.mp3" id="audio"></audio>        <!-- 開始音樂 -->
+    <audio src="death.mp3" id="Daudio"></audio>       <!-- 死亡音樂 -->
 </html>
